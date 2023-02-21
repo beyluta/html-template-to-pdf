@@ -1,25 +1,25 @@
-import html_to_pdf from "html-pdf-node";
-import fs from "fs";
+const html_to_pdf = require("html-pdf-node");
+const fs = require("fs");
 
 /**
  * This function generates a PDF file from a html template and returns it as a blob.
+ * @description 
+ * For more information about the html-pdf-node package including additional
+ * pdf generation options, visit https://www.npmjs.com/package/html-pdf-node.
  * @param {string} path - Path to the html file.
  * @param {object | null} context - Options for the PDF generation.
+ * @param {object} opts - Options for the PDF generation. Visit https://www.npmjs.com/package/html-pdf-node for more information.
  * @returns {Promise<Buffer>} The generated PDF file as a blob.
  * @example const buffer = await generatePDF('path/to/file.html', { name: 'John Doe' });
  */
-export async function generatePDF(path, context = null) {
-  const options = {
-    format: "A4",
-    margin: { top: "50px", bottom: "50px", left: "50px", right: "50px" },
-  };
+async function generatePDF(path, context = null, opts = {}) {
   const file = {
     content: await dynamicLoadPDF(path, context),
   };
 
   return await new Promise((resolve, reject) => {
     html_to_pdf
-      .generatePdf(file, options)
+      .generatePdf(file, opts)
       .then((pdfBuffer) => {
         resolve(pdfBuffer);
       })
@@ -148,3 +148,5 @@ function evaluateConditions(text, context) {
 
   return text;
 }
+
+module.exports = generatePDF;

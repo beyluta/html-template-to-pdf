@@ -63,7 +63,9 @@ const generatePDF = require("html-template-to-pdf");
 
 async function main() {
     /* 
-    **  When str is set, the element will be shown.
+    **  When `show` is present, the element will be shown.
+    **  Setting it to `false` will not make the element disappear.
+    **  Only removing the key and value from the object will make a difference.
     */
     const arrayBuffer = await generatePDF("index.html", { show: true });    
     const fileStream = fs.createWriteStream("output.pdf");

@@ -63,9 +63,8 @@ const generatePDF = require("html-template-to-pdf");
 
 async function main() {
     /* 
-    **  When `show` is present, the element will be shown.
-    **  Setting it to `false` will not make the element disappear.
-    **  Only removing the key and value from the object will make a difference.
+    **  When `show` is true, the element will be shown.
+    **  When `show` is false, the element will be hidden.
     */
     const arrayBuffer = await generatePDF("index.html", { show: true });    
     const fileStream = fs.createWriteStream("output.pdf");
@@ -79,16 +78,10 @@ main();
 The HTML file `index.html` should look like this.
 
 ```html
-<p> Hello ?{str World! }? </p>
+<p> Hello ?{show World! }? </p>
 ```
 
 The output pdf will look like this:
 ```
 Hello World!
 ```
-
-If `{ show: true }` is not passed to the `generatePDF` function, the output pdf will look like this:
-```
-Hello
-```
-<i>Note: setting `{ show: false }` will not make the element disappear. Only removing the key and value from the object will make a difference. In this example, setting `{ show: false }` would still cause the element to appear.</i>

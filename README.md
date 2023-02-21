@@ -90,3 +90,22 @@ Or if `show` is false, the output pdf will look like this:
 ```
 Hello
 ```
+
+# Example
+```html
+?{show
+<div>
+    <p> Hello, { employeeName } </p>
+    <p> Your salary is { salary } </p>
+</div>
+}?
+```
+
+Would generate:
+```
+Hello, John Doe
+Your salary is $9000
+```
+
+# Limitations
+`<style>` tags are not yet supported. You can use inline css instead.

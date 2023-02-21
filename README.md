@@ -54,6 +54,7 @@ Hello World!
 
 
 # Pseudo conditional templating
+### Conditionally showing elements
 You can also use pseudo conditional templating to hide or show elements. Here is an example of how to use it.
 
 ```javascript

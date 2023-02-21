@@ -85,3 +85,8 @@ The output pdf will look like this:
 ```
 Hello World!
 ```
+
+Or if `show` is false, the output pdf will look like this:
+```
+Hello
+```

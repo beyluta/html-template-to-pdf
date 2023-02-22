@@ -1,6 +1,6 @@
 {
   "name": "html-template-to-pdf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-platform library that converts a html file into a pdf.",
   "main": "index.js",
   "scripts": {

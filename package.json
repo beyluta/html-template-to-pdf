@@ -1,6 +1,6 @@
 {
   "name": "html-template-to-pdf",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cross-platform library that converts a html file into a pdf.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/beyluta/html-template-to-pdf"
+    "url": "https://github.com/beyluta/html-template-to-pdf"
   },
   "author": "Beyluta",
   "license": "MIT",

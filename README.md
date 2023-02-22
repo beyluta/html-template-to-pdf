@@ -1,6 +1,8 @@
 # html-template-to-pdf
 Cross-platform library that converts a html file into a pdf. 
 
+Take a look at  [`html-pdf-node package`](https://github.com/mrafiqk/html-pdf-node) for additional pdf generation options.
+
 # Installation
 ```
 npm install html-template-to-pdf

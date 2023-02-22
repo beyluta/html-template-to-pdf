@@ -92,11 +92,34 @@ Hello
 ```
 
 # Example
+```javascript
+const fs = require("fs");
+const generatePDF = require("html-template-to-pdf");
+
+async function main() {
+    const arrayBuffer = await generatePDF("index.html", {
+        employeeName: "John Doe",
+        salary: "$9000",
+        show: true
+    });    
+    const fileStream = fs.createWriteStream("output.pdf");
+    fileStream.write(Buffer.from(arrayBuffer));
+    fileStream.end();
+}
+
+main();
+```
+
 ```html
+<!-- The div will only be visible if `show` is set -->
 ?{show
 <div>
     <p> Hello, { employeeName } </p>
+
+    <!-- The paragraph will be shown if `salary` is set. Note that `salary` can be of any type: Boolean, Number, Float, String, ...  -->
+    ?{salary
     <p> Your salary is { salary } </p>
+    }?
 </div>
 }?
 ```
@@ -106,6 +129,3 @@ Would generate:
 Hello, John Doe
 Your salary is $9000
 ```
-
-# Limitations
-`<style>` tags are not yet supported. You can use inline css instead.

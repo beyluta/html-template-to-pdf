@@ -3,7 +3,7 @@ const fs = require("fs");
 
 /**
  * This function generates a PDF file from a html template and returns it as a blob.
- * @description 
+ * @description
  * For more information about the html-pdf-node package including additional
  * pdf generation options, visit https://www.npmjs.com/package/html-pdf-node.
  * @param {string} path - Path to the html file.
@@ -103,17 +103,31 @@ function evaluateConditions(text, context) {
   let endIndex = null;
   let field = "";
   let content = "";
+  let nestCount = 0;
   for (let i = 0; i < text.length; i++) {
-    if (i - 1 > -1 && text[i] === "{" && text[i - 1] === "?") {
+    if (
+      i - 1 > -1 &&
+      text[i] === "{" &&
+      text[i - 1] === "?" &&
+      startIndex === null
+    ) {
       startIndex = i - 1;
       continue;
+    } else if (
+      i - 1 > -1 &&
+      text[i] === "{" &&
+      text[i - 1] === "?" &&
+      startIndex !== null
+    ) {
+      nestCount++;
     }
 
     if (
       i + 1 < text.length &&
       text[i] === "}" &&
       text[i + 1] === "?" &&
-      startIndex !== null
+      startIndex !== null &&
+      nestCount === 0
     ) {
       endIndex = i + 1;
 
@@ -127,6 +141,14 @@ function evaluateConditions(text, context) {
       }
 
       return evaluateConditions(text, context);
+    } else if (
+      i + 1 < text.length &&
+      text[i] === "}" &&
+      text[i + 1] === "?" &&
+      startIndex !== null &&
+      nestCount > 0
+    ) {
+      nestCount--;
     }
 
     if (startIndex !== null) {

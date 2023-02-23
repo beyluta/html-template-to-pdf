@@ -112,7 +112,6 @@ function evaluateConditions(text, context) {
       startIndex === null
     ) {
       startIndex = i - 1;
-      console.log("Found at index: " + startIndex);
       continue;
     } else if (
       i - 1 > -1 &&
@@ -120,9 +119,7 @@ function evaluateConditions(text, context) {
       text[i - 1] === "?" &&
       startIndex !== null
     ) {
-      console.log("nesting");
       nestCount++;
-      // continue;
     }
 
     if (
@@ -143,7 +140,6 @@ function evaluateConditions(text, context) {
         text = text.substring(0, startIndex) + text.substring(endIndex + 1);
       }
 
-      console.log("Ending at index: " + endIndex);
       return evaluateConditions(text, context);
     } else if (
       i + 1 < text.length &&
@@ -152,9 +148,7 @@ function evaluateConditions(text, context) {
       startIndex !== null &&
       nestCount > 0
     ) {
-      console.log("un-nesting");
       nestCount--;
-      // continue;
     }
 
     if (startIndex !== null) {
@@ -170,7 +164,6 @@ function evaluateConditions(text, context) {
       if (content.length) {
         if (content[0] === " ") content = "";
         content += text[i];
-        console.log(content);
       }
     }
   }

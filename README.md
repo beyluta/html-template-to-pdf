@@ -62,7 +62,7 @@ Hello World!
 
 # Pseudo conditional templating
 
-### Conditionally showing elements
+### Showing or hiding elements
 
 You can also use pseudo conditional templating to hide or show elements. Here is an example of how to use it.
 
@@ -102,7 +102,7 @@ Or if `show` is false, the output pdf will look like this:
 Hello
 ```
 
-### Negative conditioning
+### Negative conditions
 
 Use the prefix `!` in front of the condition to make it negative. In the following example: the element will only be visible if `show` is false
 ```html

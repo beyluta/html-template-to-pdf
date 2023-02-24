@@ -131,15 +131,33 @@ function evaluateConditions(text, context) {
     ) {
       endIndex = i + 1;
 
-      if (context[field.trim()]) {
+      const replaceText = () => {
         text =
           text.substring(0, startIndex) +
           content +
           text.substring(endIndex + 1);
-      } else {
+      };
+
+      const replaceEmptyText = () => {
         text = text.substring(0, startIndex) + text.substring(endIndex + 1);
+      };
+
+      if (field.trim()[0] !== "!") {
+        if (context[field.trim()]) {
+          replaceText();
+        } else {
+          replaceEmptyText();
+        }
+      } else {
+        field = field.trim().substring(1);
+        if (!context[field.trim()]) {
+          replaceText();
+        } else {
+          replaceEmptyText();
+        }
       }
 
+      console.log(field);
       return evaluateConditions(text, context);
     } else if (
       i + 1 < text.length &&

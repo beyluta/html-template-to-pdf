@@ -102,6 +102,13 @@ Or if `show` is false, the output pdf will look like this:
 Hello
 ```
 
+### Negative conditioning
+
+Use the prefix `!` in front of the condition to make it negative. In the following example: the element will only be visible if `show` is false
+```html
+<p>Hello ?{!show World! }?</p>
+```
+
 # Example
 
 ```javascript

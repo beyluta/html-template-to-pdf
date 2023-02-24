@@ -157,7 +157,6 @@ function evaluateConditions(text, context) {
         }
       }
 
-      console.log(field);
       return evaluateConditions(text, context);
     } else if (
       i + 1 < text.length &&

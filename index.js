@@ -77,7 +77,10 @@ function replaceBracesWithValues(text, context) {
           text.substring(0, startIndex) +
           context[currentField] +
           text.substring(endIndex + 1);
+
+        return replaceBracesWithValues(text, context);
       }
+
       continue;
     }
 

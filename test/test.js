@@ -8,10 +8,22 @@ const generatePDF = require("../index.js");
 
 async function main() {
   const arrayBuffer = await generatePDF("./test/test.html", {
-    employeeName: "John Doe",
-    salary: "$9000",
     show: true,
-    isUnemployed: false,
+    employeeName: "John Doe",
+    isHomeless: false,
+    salary: {
+      amount: 90000,
+      currency: "USD",
+    },
+    profession: {
+      isUnemployed: false,
+      title: "Software Engineer",
+    },
+    address: {
+      street: "123 Main St.",
+      city: "New York",
+      state: "NY",
+    }
   });
   const fileStream = fs.createWriteStream("output.pdf");
   fileStream.write(Buffer.from(arrayBuffer));

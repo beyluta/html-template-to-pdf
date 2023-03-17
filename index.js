@@ -101,10 +101,10 @@ function replaceBracesWithValues(text, context) {
       isField = false;
       endIndex = i;
 
-      if (context[currentField]) {
+      if (navigateStringHierarchy(currentField, context)) {
         text =
           text.substring(0, startIndex) +
-          context[currentField] +
+          navigateStringHierarchy(currentField, context) +
           text.substring(endIndex + 1);
 
         return replaceBracesWithValues(text, context);
@@ -133,7 +133,7 @@ function evaluateConditions(text, context) {
 
   let startIndex = null;
   let endIndex = null;
-  let field = "";
+  let currentField = "";
   let content = "";
   let nestCount = 0;
   for (let i = 0; i < text.length; i++) {
@@ -174,15 +174,15 @@ function evaluateConditions(text, context) {
         text = text.substring(0, startIndex) + text.substring(endIndex + 1);
       };
 
-      if (field.trim()[0] !== "!") {
-        if (context[field.trim()]) {
+      if (currentField.trim()[0] !== "!") {
+        if (navigateStringHierarchy(currentField.trim(), context)) {
           replaceText();
         } else {
           replaceEmptyText();
         }
       } else {
-        field = field.trim().substring(1);
-        if (!context[field.trim()]) {
+        currentField = currentField.trim().substring(1);
+        if (!navigateStringHierarchy(currentField.trim(), context)) {
           replaceText();
         } else {
           replaceEmptyText();
@@ -202,10 +202,10 @@ function evaluateConditions(text, context) {
 
     if (startIndex !== null) {
       if (text[i] !== " " && !content.length) {
-        field += text[i];
+        currentField += text[i];
       }
 
-      if (field.length && !content.length && text[i] === " ") {
+      if (currentField.length && !content.length && text[i] === " ") {
         content = text[i];
         continue;
       }

@@ -48,6 +48,35 @@ async function dynamicLoadPDF(path, context = null) {
 }
 
 /**
+ * Navigates a string hierarchy and returns the last value.
+ * @param {string} str - The string to navigate.
+ * @param {object} context - The context object to navigate.
+ * @returns {string} The value from the context object.
+ * @example
+ * const str = navigateStringHierarchy("employee.salary", { employee: { salary: "$90000" } }});
+ * console.log(str); // Returns "$90000"
+ */
+function navigateStringHierarchy(str, context) {
+  if (!str.includes(".")) {
+    return context[str];
+  }
+
+  const hierarchy = str.split(".");
+  context = context[hierarchy[0]];
+  let newStr = "";
+  for (let i = 0; i < hierarchy.length; i++) {
+    if (i > 1) {
+      newStr += ".";
+    }
+
+    if (i > 0) {
+      newStr += hierarchy[i];
+    }
+  }
+  return navigateStringHierarchy(newStr, context);
+}
+
+/**
  * Replaces all braces with the corresponding value from the context object.
  * @param {string} text - The text to replace the braces in.
  * @param {object | null} context - Options for the PDF generation.

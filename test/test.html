@@ -2,20 +2,25 @@
 <html>
   <body>
     <div>
-      <!-- 1. Testing conditions -->
+      <!-- 1. Testing positive conditions -->
       ?{show
       <div>
         <!-- 2. Testing replacing placeholders -->
         <p>Hello, { employeeName }</p>
 
-        <!-- 3. Testing nested conditions -->
+        <!-- 3. Testing nested conditions and multiple keys -->
         ?{salary
-        <p>Your salary is { salary }</p>
+        <p>{employeeName}'s salary is { salary.amount } { salary.currency }</p>
         }?
 
-        <!-- 4. Testing negative conditions -->
-        ?{!isUnemployed
-        <p>{employeeName} is a Software Engineer</p>
+        <!-- 4. Testing nested negative conditions with no fields -->
+        ?{!isHomeless 
+        <p> {employeeName}'s address is { address.city }, { address.street }</p>
+        }?
+
+        <!-- 5. Testing negative nested conditions with multiple fields -->
+        ?{!profession.isUnemployed
+        <p>{employeeName} is a {profession.title}</p>
         }?
       </div>
       }?

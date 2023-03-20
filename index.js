@@ -58,7 +58,11 @@ async function dynamicLoadPDF(path, context = null) {
  */
 function navigateStringHierarchy(str, context) {
   if (!str.includes(".")) {
-    return context[str];
+    try {
+      return context[str];
+    } catch {
+      return null;
+    }
   }
 
   const hierarchy = str.split(".");
